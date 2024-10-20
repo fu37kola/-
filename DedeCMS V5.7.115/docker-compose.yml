@@ -1,0 +1,25 @@
+version: '3'
+services:
+  web:
+    build: .
+    container_name: dedecms-web1
+    ports:
+      - "8070:80"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    container_name: dedecms-db1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dedecms
+      MYSQL_USER: dedecms
+      MYSQL_PASSWORD: dedecms
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data:
